@@ -1,0 +1,3 @@
+﻿\\\\\\//////ERROR\\\\\\//////
+Error 500001 - Brak danych wejściowych(Przeważnie jakaś tablica). (home.php)
+Error 500002 - Brak strony o podanej nazwie. 
