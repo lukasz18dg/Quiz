@@ -1,3 +1,4 @@
 ﻿\\\\\\//////ERROR\\\\\\//////
-Error 500001 - Brak danych wejściowych(Przeważnie jakaś tablica). (home.php)
+Error 500001 - Brak danych wejściowych, możliwy brak Cookies. 
 Error 500002 - Brak strony o podanej nazwie. 
+Error 500003 - Brak sesji.

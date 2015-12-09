@@ -15,16 +15,16 @@
  <body>
   <form name="logowanie" method="post" action="logowaniedosystemu.php"> 
    <table border="1" id="centrowanie" cellspacing="5" cellpadding="5">
-    <tr>
-     <td colspan="2"><center>Logowanie do strony internetowej</center></td>
+    <tr align="center" valign="middle">
+     <td colspan="2">Logowanie do strony internetowej</td>
     </tr>
-    <tr>
-     <td class="szerokosc"><center>Login</center></td>
-	 <td><center><input type="text" name="login" required = "required" size="35"></td>
+    <tr align="center" valign="middle">
+     <td class="szerokosc">Login</td>
+	 <td><input type="text" name="login" required = "required" size="35" maxlength="25"></td>
 	</tr>
-	<tr>
-     <td class="szerokosc"><center>Haslo</center></td>
-	 <td><center><input type="password" name="haslo" required = "required" size="35"></center></td>
+	<tr align="center" valign="middle">
+     <td class="szerokosc">Haslo</td>
+	 <td><input type="password" name="haslo" required = "required" size="35" maxlength="40"></td>
 	</tr>
 	<?php
 	 if(isset($tablica))
@@ -34,8 +34,8 @@
 	  echo '</ul></td></tr>';
 	 }
 	?>
-	<tr>
-	 <td colspan="2"><center><input type="submit" name="Wyslij" value="Wyślij"></center></td>
+	<tr align="center" valign="middle">
+	 <td colspan="2"><input type="submit" name="Wyslij" value="Wyślij"></td>
 	</tr>
    </table>
   </form>

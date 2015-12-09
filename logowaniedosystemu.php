@@ -1,8 +1,7 @@
 ﻿<?php 
  if (sizeof($_POST) == 0) 
  {
- echo $_SERVER['REQUEST_URI'];
-  include('index?url=logowanie');
+  include('logowanie.php');
   exit();
  }
  $walidacja=false;
@@ -32,6 +31,13 @@
  else
  {
   $rekord=mysql_fetch_array($zapytanie_id); 
-  include('includes/home.php');
+  setcookie('id_uzytkownika', $rekord['id_uzytkownika'], time()+3600);
+  setcookie('login', $rekord['login'], time()+3600);
+  setcookie('haslo', $rekord['haslo'], time()+3600);
+  setcookie('moc', $rekord['moc'], time()+3600);
+  setcookie('email', $rekord['email'], time()+3600);
+  setcookie('klasa', $rekord['klasa'], time()+3600);
+  setcookie('litera', $rekord['litera'], time()+3600);
+  echo '<center>Zalogowałeś/Zalogowałaś się poprawnie już możesz przejść do części tylko dla zalogowanych.<center><br><a href="indexhome.php">Dalej</a>';
  }
 ?>

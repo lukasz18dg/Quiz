@@ -1,0 +1,3 @@
+﻿walidacjadodawanieuzytkownika.php
+
+* header nie przekazuje tablicy, dziwny błąd naprawić.
