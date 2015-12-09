@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 19 Lut 2013, 15:53
+-- Czas wygenerowania: 19 Lut 2013, 16:43
 -- Wersja serwera: 5.5.29
 -- Wersja PHP: 5.2.17
 
@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `test` (
   `pytania` mediumtext COLLATE utf8_polish_ci NOT NULL,
   `przedmiot` int(255) NOT NULL,
   `dozwolony` mediumtext COLLATE utf8_polish_ci NOT NULL,
+  `nazwa_testu` tinytext COLLATE utf8_polish_ci NOT NULL,
   PRIMARY KEY (`id_testu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
 
