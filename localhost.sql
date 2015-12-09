@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 19 Lut 2013, 16:43
+-- Czas wygenerowania: 19 Lut 2013, 20:47
 -- Wersja serwera: 5.5.29
 -- Wersja PHP: 5.2.17
 
@@ -48,14 +48,15 @@ CREATE TABLE IF NOT EXISTS `przedmioty` (
   `id_przedmiotu` int(255) NOT NULL AUTO_INCREMENT,
   `przedmiot` tinytext COLLATE utf8_polish_ci NOT NULL,
   PRIMARY KEY (`id_przedmiotu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=3 ;
 
 --
 -- Zrzut danych tabeli `przedmioty`
 --
 
 INSERT INTO `przedmioty` (`id_przedmiotu`, `przedmiot`) VALUES
-(1, 'Brak kategori');
+(1, 'Brak kategori'),
+(2, 'Polski');
 
 -- --------------------------------------------------------
 
@@ -71,7 +72,13 @@ CREATE TABLE IF NOT EXISTS `pytania_i_odpowiedzi` (
   `poprawna_odpowiedz` mediumtext COLLATE utf8_polish_ci NOT NULL,
   `tworca_pytania` int(255) NOT NULL,
   PRIMARY KEY (`id_pytania`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
+
+--
+-- Zrzut danych tabeli `pytania_i_odpowiedzi`
+--
+
+
 
 -- --------------------------------------------------------
 
@@ -87,7 +94,13 @@ CREATE TABLE IF NOT EXISTS `test` (
   `dozwolony` mediumtext COLLATE utf8_polish_ci NOT NULL,
   `nazwa_testu` tinytext COLLATE utf8_polish_ci NOT NULL,
   PRIMARY KEY (`id_testu`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=1;
+
+--
+-- Zrzut danych tabeli `test`
+--
+
+
 
 -- --------------------------------------------------------
 
