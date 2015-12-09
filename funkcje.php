@@ -1,5 +1,4 @@
 <?php
-session_start();
 //FUNKCJE 
 //FUNKCJE WYKORZYSTYWANE W logowaniedosystemu.php
  function blad($a)
@@ -7,7 +6,9 @@ session_start();
   $tablica[]=$a;
   include('logowanie.php');
  }
-//FUNKCJE WYKORZYSTYWANE W walidacjadodawanieuzytkownika.php 
+//FUNKCJE WYKORZYSTYWANE W:
+//*walidacjadodawanieuzytkownika.php 
+//*przedmioty.php
  function blad1($a,$strona)
  {
   $tablica[]=$a;

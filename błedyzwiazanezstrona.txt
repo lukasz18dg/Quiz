@@ -1,3 +1,11 @@
-﻿walidacjadodawanieuzytkownika.php
+﻿walidacjadodawaniequziu.php oraz dodawaniequizu.php
 
-* header nie przekazuje tablicy, dziwny błąd naprawić.
+* dodac mozliwosc dodania pytania z bazy.
+* takie pobrane pytanie stanie się automatycznie niezmienialne
+
+walidacjadodawaniequziu.php
+
+* dodac pole wymagane dla pytan oraz odpowiedzi 
+* sprobowac zastosować to samo dla radio lub checkbox
+
+** przerwana praca na czas stworzenie strony dodającej przedmioty do bazy.

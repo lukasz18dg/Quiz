@@ -1,4 +1,5 @@
 ﻿<?php
+session_start();
  $radio=''; $email=''; $rok=''; $litera='';
  $login=$_GET['login']; 
  $haslo=$_GET['haslo']; 
@@ -19,8 +20,8 @@
  if($radio=='S'){if(empty($rok)){blad1('Brak roku dla studenta.','indexhome.php?url=dodawanieuzytkownika&login='.$login.'&haslo='.$haslo.'&moc='.$radio.'&email='.$email.'&rok='.$rok.'&litera='.$litera);}}
  if($radio=='S'){if(empty($litera)){blad1('Brak klasy dla studenta.','indexhome.php?url=dodawanieuzytkownika&login='.$login.'&haslo='.$haslo.'&moc='.$radio.'&email='.$email.'&rok='.$rok.'&litera='.$litera);}}
  // POPRAWIC NA JEDEN WARUNEK XOR NIE DZIALA, DZIWNE BLEDY
- $połacz=mysql_connect('localhost', 'root','czyalamakota') or die(blad1('Nie można połączyć się z bazą danych','dodawanieuzytkownika.php'));
- mysql_select_db('projekt', $połacz) or die(blad1('Nie można wybrać bazy danych','dodawanieuzytkownika.php'));
+ $połacz=mysql_connect('localhost', 'root','czyalamakota') or die(blad1('Nie można połączyć się z bazą danych','indexhome.php?url=dodawanieuzytkownika'));
+ mysql_select_db('projekt', $połacz) or die(blad1('Nie można wybrać bazy danych','indexhome.php?url=dodawanieuzytkownika'));
  $zapytanie_id=mysql_query('SELECT `login` FROM `uzytkownicy` WHERE `login` = \''.$login.'\';');
  if((mysql_num_rows($zapytanie_id))<1)
  {

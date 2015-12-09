@@ -1,13 +1,13 @@
 ﻿<?php
  session_start();
  if(!(empty($_SESSION['dane']))){$tablica=explode('<!59%6>',$_SESSION['dane']); unset($_SESSION['dane']);}
+ if(empty($_SESSION['id_uzytkownika'])){include('braksesji.php');}
+
 ?>
 <html>
  <head>
   <title>Strona główna</title>
-  <meta name="AUTHOR" content="Tworus Lukasz">
-  <meta http-equiv="Expires" content="0" />
-  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+  <meta name="AUTHOR" content="Tworus Łukasz">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <style type="text/css">
    <!--
@@ -20,7 +20,6 @@
  </head>
  <body>
   <?php   
-   if(empty($_SESSION['id_uzytkownika'])){include('braksesji.php');}
    if(($_SESSION['moc']!='A')&&($_SESSION['moc']!='M')){include('brakmocy.php');} 
    echo '<table border="1" id="centrowanie" cellspacing="5" cellpadding="5"><tr>';
    include('lewaczesc.php');

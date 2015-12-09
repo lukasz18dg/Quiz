@@ -1,19 +1,13 @@
-<?php
+﻿<?php
 session_start();
  /*
   W - pole wielokrotnego wyboru
   J - pole jednokrotnego wyboru
   T - pole tekstowe
  */
- if(!(empty($_GET['wysylanie'])))
- {
-  if(($_GET['wysylanie'])=='Wyslij')
-  {
-   header('Refresh:0; URL=indexhome.php?url=walidacjadodawaniaquizu');
-   exit();
-  }
- }
+ if(empty($_SESSION['id_uzytkownika'])){include('braksesji.php');}
  if(!(empty($_SESSION['dane']))){$tablica=$_SESSION['dane'];}
+ if(!(empty($_SESSION['bledy']))){$bledy=explode('<!59%6>',$_SESSION['bledy']); unset($_SESSION['bledy']);}
  if(!(empty($tablica)))
  {
   $keys=array_keys($tablica);
@@ -21,44 +15,36 @@ session_start();
   $ostatni+=1;	
  }
  else {$ostatni=1;}
- if(!(empty($_GET['dodac'])))
+ echo '<html><head><title>Dodawanie nowego quizu</title><meta name="author" content="Tworus Łukasz">
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> <style type="text/css">
+ <!-- #centrowanie {width:80%; min-width:1000px; max-width:3000px; margin: 0 auto;} #lewytabelka {width:20%; min-width:200px; max-width:600px;}
+ #glownytabelka {width:80%; min-width:800px; max-width:2400px;} --></style></head><body><form action="indexhome.php">
+ <table border="1" id="centrowanie" cellspacing="5" cellpadding="5"><tr>';
+ include('lewaczesc.php');
+ echo '<td id="glownytabelka"><center><table border="1" cellspacing="3" cellpadding="3"><tr><td><center>TWORZENIE NOWEGO TESTU</tr></td></tr>';
+ 
+ 
+ 
+ $połacz=mysql_connect('localhost', 'root','czyalamakota') or die(blad1('Nie można połączyć się z bazą danych','indexhome.php?url=dodawaniequizu'));
+ mysql_select_db('projekt', $połacz) or die(blad1('Nie można wybrać bazy danych','indexhome.php?url=dodawaniequizu'));
+ 
+ if(!(empty($_GET['przedmiot'])))
  {
-  switch($_GET['dodac'])
+  $zapytanie_id=mysql_query('SELECT `przedmiot` FROM `przedmioty` WHERE `przedmiot`=\''.$_GET['przedmiot'].'\';');
+  if(mysql_num_rows($zapytanie_id)<1)
   {
-   case 'pole_wielokrotnego':
-   {
-    $tablica[$ostatni]['name']='pytanie'.$ostatni;
-    $tablica[$ostatni]['value']='';
-    $tablica[$ostatni]['typpola']='W';
-    $tablica[$ostatni]['poprawna']='';
-    $tablica[$ostatni]['liczbaodp']=0;
-	break;
-   }
-   case 'pole_jednokrotnego':
-   {
-    $tablica[$ostatni]['name']='pytanie'.$ostatni;
-    $tablica[$ostatni]['value']='';
-	$tablica[$ostatni]['typpola']='J';
-    $tablica[$ostatni]['poprawna']='';
-    $tablica[$ostatni]['liczbaodp']=0;
-	break;
-   }
-   case 'pole_tekstowe':
-   {
-    $tablica[$ostatni]['name']='pytanie'.$ostatni;
-	$tablica[$ostatni]['typpola']='T';
-    $tablica[$ostatni]['value']='';
-	break;
-   }
-   $_GET['dodac']="";
+   $zapytanie_id='INSERT INTO `projekt`.`przedmioty` (`id_przedmiotu`,`przedmiot`) VALUES (NULL, \''.$_GET['przedmiot'].'\');';
+   mysql_query($zapytanie_id)or die(blad1('Problem z zapisem do bazy danych','indexhome.php?url=dodajnowyprzedmiot'));
+   echo 'Dodano nowy przedmiot<br>';
   }
-  $odpowiedznr=explode(':',$_GET['dodac']);
-  $keys = array_keys($odpowiedznr);
-  $ostatniodp = $keys[count($keys)-1];   
-  if($ostatniodp>0) {$tablica[$odpowiedznr[1]]['liczbaodp']+=1;}
+  else{(blad1('Przedmiot o takiej nazwię istnieje proszę wybrać inną nazwę','indexhome.php?url=dodajnowyprzedmiot'));}
  }
- echo '<html><head><title>Tworus Lukasz</title><meta name="author" content="Tworus �ukasz"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  </head><body><form action="indexhome.php"><table border="1">';
+ 
+ 
+ 
+ 
+ 
+ 
  if(!(empty($tablica)))
  {
   for($i=1; $i<$ostatni; $i++)
@@ -77,10 +63,12 @@ session_start();
      echo '<tr><td>'.$i.' <input type="text" name="'.$tablica[$i]['name'].'"';
      if(!(empty($tablica[$i]['value']))) {echo 'value="'.$tablica[$i]['value'].'"';}
 	 echo '></td></tr>';
-	 if($tablica[$i]['liczbaodp']==0) {$tablica[$i]['liczbaodp']=1;}
-	 for($j=0; $j<$tablica[$i]['liczbaodp']+1; $j++)
+	 if(empty($tablica[$i]['liczbaodp'])) {$tablica[$i]['liczbaodp']=2;}
+	 for($j=1; $j<$tablica[$i]['liczbaodp']+1; $j++)
 	 {
-	  echo '<tr><td><input type="radio" name="odpowiedz'.$i.'<o8765>'.$j.'" value="'.$j.'">  <input type"text" name="odpowiedztekst'.$ostatni.'"';
+	  echo '<tr><td><input type="radio" name="odpowiedz:'.$i.'" value="'.$j.'"';
+	  if($tablica[$i]['poprawna']){if($j==$tablica[$i]['poprawna']){echo 'checked';}} 
+	  echo'><input type="text" name="odpowiedztekst:'.$i.':'.$j.'"';
 	  if(!(empty($tablica[$i][$j]))){echo 'value="'.$tablica[$i][$j].'"';}
 	  echo'></td></tr>';
 	 }
@@ -92,10 +80,22 @@ session_start();
 	 echo '<tr><td>'.$i.' <input type="text" name="'.$tablica[$i]['name'].'"';
      if(!(empty($tablica[$i]['value']))) {echo 'value="'.$tablica[$i]['value'].'"';}
 	 echo '></td></tr>';
-	 if($tablica[$i]['liczbaodp']==0) {$tablica[$i]['liczbaodp']=1;}
-	 for($j=0; $j<$tablica[$i]['liczbaodp']+1; $j++)
+	 if(empty($tablica[$i]['liczbaodp'])) {$tablica[$i]['liczbaodp']=2;}
+	 if(!(empty($tablica[$i]['poprawna'])))
 	 {
-	  echo '<tr><td><input type="checkbox" name="odpowiedz'.$ostatni.'" value="'.$j.'">  <input type"text" name="odpowiedztekst'.$ostatni.'"';
+	  $listaodpowiedzi=explode('<$%#>',$tablica[$i]['poprawna']);
+	  if(!(empty($listaodpowiedzi)))
+      {
+       $keys=array_keys($listaodpowiedzi);
+       $liczba=$keys[count($keys)-1];
+       $liczba+=1;	
+      }
+	 }
+	 for($j=1; $j<$tablica[$i]['liczbaodp']+1; $j++)
+	 {
+	  echo '<tr><td><input type="checkbox" name="odpowiedz:'.$i.':'.$j.'" value="'.$j.'"';
+      if(!(empty($listaodpowiedzi))){for($l=0; $l<$liczba; $l++) {if($j==$listaodpowiedzi[$l]){echo 'checked';}}}  
+	  echo '><input type="text" name="odpowiedztekst:'.$i.':'.$j.'"';
 	  if(!(empty($tablica[$i][$j]))){echo 'value="'.$tablica[$i][$j].'"';}
 	  echo'></td></tr>';
 	 }
@@ -104,16 +104,16 @@ session_start();
 	}
    }
   }
-  print_r($tablica);
   $_SESSION['dane']=$tablica;
  }
- echo'<tr><td><input type="submit" value="pole_wielokrotnego" name="dodac"><input type="submit" value="pole_jednokrotnego" name="dodac">
-  <input type="submit" value="pole_tekstowe" name="dodac"> <br></td>
-  <tr>
-   <td>
-    <input type="hidden" name="url" value="dodawaniequizu">
-    <input type="submit" value="Wyslij" name="wysylanie">
-   </td>
-  </tr>
- </table></form></body></html>'; 
+ echo'<tr><td><input type="submit" value="pole_wielokrotnego" name="dodac"><input type="submit" value="pole_jednokrotnego" name="dodac"> 
+ <input type="submit" value="pole_tekstowe" name="dodac"> <br></td><tr><td><input type="hidden" name="url" value="walidacjadodawaniaquizu">
+ <input type="submit" value="kasuj_test" name="dodac"><input type="submit" value="Wyslij" name="zapis"></td></tr>';
+ if(isset($bledy))
+ {
+  echo '<tr><td colspan="2"><center>Lista błedów</center><br><ul>';
+  foreach($bledy as $i) {echo '<span style="color: RED;"><li>'.$i.'</li></span>'; }   
+  echo '</ul></td></tr>';
+ }
+ echo'</table></center></td></tr><table></form></body></html>'; 
 ?>

@@ -1,10 +1,10 @@
 
+
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 CREATE DATABASE `projekt` DEFAULT CHARACTER SET utf8 COLLATE utf8_polish_ci;
 USE `projekt`;
-
 CREATE TABLE IF NOT EXISTS `odpowiedzi_uzytkownika` (
   `id_odpowiedzi_uzytkownika` int(255) NOT NULL AUTO_INCREMENT,
   `id_uzytkownika` int(255) NOT NULL,
@@ -49,8 +49,9 @@ CREATE TABLE IF NOT EXISTS `uzytkownicy` (
   `klasa` varchar(2) COLLATE utf8_polish_ci DEFAULT NULL,
   `litera` varchar(5) COLLATE utf8_polish_ci DEFAULT NULL,
   PRIMARY KEY (`id_uzytkownika`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=2;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=4 ;
 
 INSERT INTO `uzytkownicy` (`id_uzytkownika`, `login`, `haslo`, `moc`, `email`, `klasa`, `litera`) VALUES
-(1, 'Admin', '7ae7a24fc34645787cd4d447e661a1c47ec7e52b', 'A', NULL, NULL, NULL);
-
+(1, 'Admin', '7ae7a24fc34645787cd4d447e661a1c47ec7e52b', 'A', NULL, NULL, NULL),
+(2, 'Nauczyciel', '7ae7a24fc34645787cd4d447e661a1c47ec7e52b', 'M', NULL, NULL, NULL),
+(3, 'Uczen', '7ae7a24fc34645787cd4d447e661a1c47ec7e52b', 'S', NULL, '4', 'c');

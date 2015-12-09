@@ -5,8 +5,6 @@
  <head>
   <title>Strona główna</title>
   <meta name="AUTHOR" content="Tworus Lukasz">
-  <meta http-equiv="Expires" content="0" />
-  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <style type="text/css">
    <!--
@@ -18,7 +16,7 @@
  </head>
  <body>
   <?php   
-   if((empty($_COOKIE['id_uzytkownika']))&&(empty($_SESSION['id_uzytkownika']))) {echo '<center>Error 500001\500003</center><br><center>Proszę skomunikować z aministratorem strony</center>'; exit();} 
+   if((empty($_COOKIE['id_uzytkownika']))&&(empty($_SESSION['id_uzytkownika']))) {include('braksesji.php');} 
    if(empty($_SESSION['id_uzytkownika']))
    {
     $_SESSION['id_uzytkownika']=$_COOKIE['id_uzytkownika']; setcookie('id_uzytkownika', "", 0); 
@@ -40,7 +38,7 @@
    if(!(empty($_SESSION['email']))) echo '$_SESSION[email]='.$_SESSION['email'].'<br>';
    if(!(empty($_SESSION['klasa']))) echo '$_SESSION[klasa]='.$_SESSION['klasa'].'<br>';
    if(!(empty($_SESSION['litera']))) echo '$_SESSION[litera]='.$_SESSION['litera'].'<br>';
-   echo '</td></tr><table>'.'<BR>'; 
+   echo '</td></tr><table><BR>'; 
   ?>
  </body>
 </html>

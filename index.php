@@ -1,3 +1,4 @@
 ﻿<?php
- include('logowanie.php');                           
+ include('logowanie.php');        
+//phpinfo(); 
 ?>
